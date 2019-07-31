@@ -9,9 +9,10 @@
 
     <Grid>
 
-        <analogcontroller:AnalogController WidthRequest="200"
+        <analogcontroller:AnalogController WidthRequest="300"
                                            HeightRequest="200"
                                            Margin="15"
+                                           BackgroundColor="Gold"
                                            VerticalOptions="End"
                                            HorizontalOptions="Start" />
 

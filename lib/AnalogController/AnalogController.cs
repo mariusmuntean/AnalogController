@@ -18,15 +18,15 @@ namespace AnalogController
             _backgroundBoxView = new Frame() { BackgroundColor = Color.LightGray };
             rootLayout.Children.Add(
                     _backgroundBoxView,
-                    Constraint.RelativeToParent(p => 0.0),
-                    Constraint.RelativeToParent(p => 0.0),
+                    Constraint.RelativeToParent(p => p.Width / 2.0 - Math.Min(p.Width, p.Height) / 2.0),
+                    Constraint.RelativeToParent(p => p.Height / 2.0 - Math.Min(p.Width, p.Height) / 2.0),
                     Constraint.RelativeToParent(p =>
                     {
                         _backgroundBoxView.CornerRadius = (float)(Math.Min(p.Width, p.Height) / 2.0);
-                        return p.Width;
+                        return Math.Min(p.Width, p.Height);
                     }
                         ),
-                    Constraint.RelativeToParent(p => p.Height)
+                    Constraint.RelativeToParent(p => Math.Min(p.Width, p.Height))
                 );
 
             _thumbBoxView = new BoxView() { Color = Color.FromHex("#FFB3B3B3") };
@@ -35,16 +35,16 @@ namespace AnalogController
             _thumbBoxView.GestureRecognizers.Add(thumbDragGestureRecognizer);
             rootLayout.Children.Add(
                     _thumbBoxView,
-                    Constraint.RelativeToParent(p => p.Width / 2.0 - (0.1 * p.Width)),
-                    Constraint.RelativeToParent(p => p.Height / 2.0 - (0.1 * p.Height)),
+                    Constraint.RelativeToParent(p => p.Width / 2.0 - (0.1 * Math.Min(p.Width, p.Height))),
+                    Constraint.RelativeToParent(p => p.Height / 2.0 - (0.1 * Math.Min(p.Width, p.Height))),
                     Constraint.RelativeToParent(p =>
                     {
-                        var desiredWidth = 0.2 * p.Width;
+                        var desiredWidth = 0.2 * Math.Min(p.Width, p.Height);
 
                         _thumbBoxView.CornerRadius = desiredWidth / 2.0;
                         return desiredWidth;
                     }),
-                    Constraint.RelativeToParent(p => 0.2 * p.Height)
+                    Constraint.RelativeToParent(p => 0.2 * Math.Min(p.Width, p.Height))
                 );
 
             this.Content = rootLayout;
