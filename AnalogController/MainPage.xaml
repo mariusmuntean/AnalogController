@@ -1,4 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
@@ -9,13 +10,17 @@
 
     <Grid>
 
-        <analogcontroller:AnalogController WidthRequest="300"
+        <StackLayout VerticalOptions="Center"
+                     HorizontalOptions="Center">
+            <Label Text="{Binding Source={x:Reference AnalogController}, Path=XAxis, StringFormat='X-Axis: {0:N}'}" />
+            <Label Text="{Binding Source={x:Reference AnalogController}, Path=YAxis, StringFormat='Y-Axis: {0:N}'}" />
+        </StackLayout>
+
+        <analogcontroller:AnalogController x:Name="AnalogController"
+                                           WidthRequest="300"
                                            HeightRequest="200"
                                            Margin="15"
-                                           BackgroundColor="Gold"
                                            VerticalOptions="End"
-                                           HorizontalOptions="Start" />
-
+                                           HorizontalOptions="Center" />
     </Grid>
-
 </ContentPage>

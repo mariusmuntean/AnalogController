@@ -6,7 +6,7 @@ namespace AnalogController
     public partial class AnalogController : ContentView
     {
         private const string ThumbToCenterAnimation = "AnimateThumbToCenter";
-        private readonly BoxView _thumbBoxView;
+        private readonly Frame _thumbFrame;
         private readonly Func<double, double, double> _getOffset;
 
         public AnalogController()
@@ -15,33 +15,33 @@ namespace AnalogController
 
             var rootLayout = new RelativeLayout();
 
-            _backgroundBoxView = new Frame() { BackgroundColor = Color.LightGray };
+            _backgroundFrame = new Frame { BackgroundColor = Color.LightGray };
             rootLayout.Children.Add(
-                    _backgroundBoxView,
+                    _backgroundFrame,
                     Constraint.RelativeToParent(p => p.Width / 2.0 - Math.Min(p.Width, p.Height) / 2.0),
                     Constraint.RelativeToParent(p => p.Height / 2.0 - Math.Min(p.Width, p.Height) / 2.0),
                     Constraint.RelativeToParent(p =>
                     {
-                        _backgroundBoxView.CornerRadius = (float)(Math.Min(p.Width, p.Height) / 2.0);
+                        _backgroundFrame.CornerRadius = (float)(Math.Min(p.Width, p.Height) / 2.0);
                         return Math.Min(p.Width, p.Height);
                     }
                         ),
                     Constraint.RelativeToParent(p => Math.Min(p.Width, p.Height))
                 );
 
-            _thumbBoxView = new BoxView() { Color = Color.FromHex("#FFB3B3B3") };
+            _thumbFrame = new Frame { BackgroundColor = Color.FromHex("#FFB3B3B3") };
             var thumbDragGestureRecognizer = new PanGestureRecognizer();
             thumbDragGestureRecognizer.PanUpdated += OnThumbDragged;
-            _thumbBoxView.GestureRecognizers.Add(thumbDragGestureRecognizer);
+            _thumbFrame.GestureRecognizers.Add(thumbDragGestureRecognizer);
             rootLayout.Children.Add(
-                    _thumbBoxView,
+                    _thumbFrame,
                     Constraint.RelativeToParent(p => p.Width / 2.0 - (0.1 * Math.Min(p.Width, p.Height))),
                     Constraint.RelativeToParent(p => p.Height / 2.0 - (0.1 * Math.Min(p.Width, p.Height))),
                     Constraint.RelativeToParent(p =>
                     {
                         var desiredWidth = 0.2 * Math.Min(p.Width, p.Height);
 
-                        _thumbBoxView.CornerRadius = desiredWidth / 2.0;
+                        _thumbFrame.CornerRadius = (float)(desiredWidth / 2.0);
                         return desiredWidth;
                     }),
                     Constraint.RelativeToParent(p => 0.2 * Math.Min(p.Width, p.Height))
@@ -57,7 +57,7 @@ namespace AnalogController
 
         private double previousX = 0.0;
         private double previousY = 0.0;
-        private readonly Frame _backgroundBoxView;
+        private readonly Frame _backgroundFrame;
 
         private void OnThumbDragged(object sender, PanUpdatedEventArgs e)
         {
@@ -69,32 +69,34 @@ namespace AnalogController
 
                     previousX = e.TotalX;
                     previousY = e.TotalY;
-                    _thumbBoxView.Scale = 0.85;
+                    _thumbFrame.Scale = 0.85;
                     break;
 
                 case GestureStatus.Running:
-                    var newX = _thumbBoxView.TranslationX + _getOffset(e.TotalX, previousX);
-                    var newY = _thumbBoxView.TranslationY + _getOffset(e.TotalY, previousY);
+                    var newX = _thumbFrame.TranslationX + _getOffset(e.TotalX, previousX);
+                    var newY = _thumbFrame.TranslationY + _getOffset(e.TotalY, previousY);
 
                     var newRadius = Math.Sqrt(Math.Pow(newX, 2) + Math.Pow(newY, 2));
                     var newTheta = Math.Atan2(newY, newX);
 
-                    newRadius = Math.Min(_backgroundBoxView.Width / 2.0, newRadius);
+                    newRadius = Math.Min(_backgroundFrame.Width / 2.0, newRadius);
 
-                    _thumbBoxView.TranslationX = newRadius * Math.Cos(newTheta);
-                    _thumbBoxView.TranslationY = newRadius * Math.Sin(newTheta);
+                    _thumbFrame.TranslationX = newRadius * Math.Cos(newTheta);
+                    _thumbFrame.TranslationY = newRadius * Math.Sin(newTheta);
+
+                    UpdateControllerOutputs();
 
                     previousX = e.TotalX;
                     previousY = e.TotalY;
                     break;
 
                 case GestureStatus.Completed:
-                    _thumbBoxView.Scale = 1.0;
+                    _thumbFrame.Scale = 1.0;
                     AnimateThumbToCenter();
                     break;
 
                 case GestureStatus.Canceled:
-                    _thumbBoxView.Scale = 1.0;
+                    _thumbFrame.Scale = 1.0;
                     AnimateThumbToCenter();
                     break;
             }
@@ -104,11 +106,18 @@ namespace AnalogController
         {
             var centerAnimation = new Animation(d =>
             {
-                _thumbBoxView.TranslationX = d * _thumbBoxView.TranslationX;
-                _thumbBoxView.TranslationY = d * _thumbBoxView.TranslationY;
+                _thumbFrame.TranslationX = d * _thumbFrame.TranslationX;
+                _thumbFrame.TranslationY = d * _thumbFrame.TranslationY;
             }, 1.0, 0.0, Easing.CubicIn);
 
             centerAnimation.Commit(this, ThumbToCenterAnimation, length: 150);
+        }
+
+        private void UpdateControllerOutputs()
+        {
+            var smallerDimension = Math.Min(_backgroundFrame.Width, _backgroundFrame.Height);
+            XAxis = _thumbFrame.TranslationX / (smallerDimension / 2.0);
+            YAxis = _thumbFrame.TranslationY / (smallerDimension / 2.0);
         }
     }
 }
