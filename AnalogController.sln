@@ -1,11 +1,15 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalogController.Android", "AnalogController.Android\AnalogController.Android.csproj", "{3E61A777-BDBD-4320-89D3-7E5C139B6A55}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalogController.Sample.Android", "AnalogController.Android\AnalogController.Sample.Android.csproj", "{3E61A777-BDBD-4320-89D3-7E5C139B6A55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalogController.iOS", "AnalogController.iOS\AnalogController.iOS.csproj", "{72CC6EE3-549E-4DAB-8C25-05580F471643}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalogController.Sample.iOS", "AnalogController.iOS\AnalogController.Sample.iOS.csproj", "{72CC6EE3-549E-4DAB-8C25-05580F471643}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalogController", "AnalogController\AnalogController.csproj", "{EB550752-D1C9-4F2A-88A6-E7B5FB284C10}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalogController.Sample", "AnalogController\AnalogController.Sample.csproj", "{EB550752-D1C9-4F2A-88A6-E7B5FB284C10}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{3A181DE2-A274-43FB-B98A-7EFA57B2F8EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalogController", "lib\AnalogController\AnalogController.csproj", "{DEF35CEE-B2FB-4A98-BC53-8045313298E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,5 +57,20 @@ Global
 		{EB550752-D1C9-4F2A-88A6-E7B5FB284C10}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{EB550752-D1C9-4F2A-88A6-E7B5FB284C10}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{EB550752-D1C9-4F2A-88A6-E7B5FB284C10}.Release|iPhone.Build.0 = Release|Any CPU
+		{DEF35CEE-B2FB-4A98-BC53-8045313298E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEF35CEE-B2FB-4A98-BC53-8045313298E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEF35CEE-B2FB-4A98-BC53-8045313298E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEF35CEE-B2FB-4A98-BC53-8045313298E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEF35CEE-B2FB-4A98-BC53-8045313298E8}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{DEF35CEE-B2FB-4A98-BC53-8045313298E8}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{DEF35CEE-B2FB-4A98-BC53-8045313298E8}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{DEF35CEE-B2FB-4A98-BC53-8045313298E8}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{DEF35CEE-B2FB-4A98-BC53-8045313298E8}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{DEF35CEE-B2FB-4A98-BC53-8045313298E8}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{DEF35CEE-B2FB-4A98-BC53-8045313298E8}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{DEF35CEE-B2FB-4A98-BC53-8045313298E8}.Release|iPhone.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DEF35CEE-B2FB-4A98-BC53-8045313298E8} = {3A181DE2-A274-43FB-B98A-7EFA57B2F8EB}
 	EndGlobalSection
 EndGlobal

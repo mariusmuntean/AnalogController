@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace AnalogController
+namespace AnalogController.Sample
 {
     public partial class App : Application
     {

@@ -3,7 +3,7 @@ using Xamarin.Forms;
 
 namespace AnalogController
 {
-    public class AnalogController : ContentView
+    public partial class AnalogController : ContentView
     {
         BoxView thumbBoxView;
 

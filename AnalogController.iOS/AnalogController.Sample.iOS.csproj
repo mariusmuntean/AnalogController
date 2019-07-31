@@ -123,11 +123,11 @@
     <PackageReference Include="Xamarin.Forms" Version="4.1.0.618606" />
     <PackageReference Include="Xamarin.Essentials" Version="1.2.0" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\AnalogController\AnalogController.csproj">
+    <ProjectReference Include="..\AnalogController\AnalogController.Sample.csproj">
       <Project>{EB550752-D1C9-4F2A-88A6-E7B5FB284C10}</Project>
-      <Name>AnalogController</Name>
+      <Name>AnalogController.Sample</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

@@ -5,7 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-namespace AnalogController.iOS
+namespace AnalogController.Sample.iOS
 {
     public class Application
     {
