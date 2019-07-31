@@ -11,6 +11,7 @@
 
         <analogcontroller:AnalogController WidthRequest="200"
                                            HeightRequest="200"
+                                           Margin="15"
                                            VerticalOptions="End"
                                            HorizontalOptions="Start" />
 
